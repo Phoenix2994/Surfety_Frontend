@@ -1,0 +1,261 @@
+[
+    {
+        "key": "email",
+        "tags": [
+            "email",
+            "e-mail",
+            "mail",
+            "indirizzo di posta"
+        ],
+        "score": "2"
+    },
+    {
+        "key": "gender",
+        "tags": [
+            "gender",
+            "genere",
+            "maschile",
+            "femminile",
+            "maschio",
+            "femmina",
+            "male",
+            "famale",
+            "sesso"
+        ],
+        "score": "2"
+    },
+    {
+        "key": "name",
+        "tags": [
+            "name",
+            "firstname",
+            "first-name",
+            "first_name",
+            "first name",
+            "nome"
+        ],
+        "score": "2"
+    },
+    {
+        "key": "surname",
+        "tags": [
+            "cognome",
+            "nome di famiglia"
+        ],
+        "score": "2"
+    },
+    {
+        "key": "age",
+        "tags": [
+            "years_old",
+            "years old",
+            "eta",
+            "età",
+            "anni"
+        ],
+        "score": "2"
+    },
+    {
+        "key": "mobile",
+        "tags": [
+            "telephone number",
+            "telephone",
+            "numero di telefono",
+            "cellulare",
+            "numero di cellulare"
+        ],
+        "score": "5"
+    },
+    {
+        "key": "numero fisso",
+        "tags": [
+            "telefono fisso",
+            "telefono di casa"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "password",
+        "tags": [
+            "parola d'accesso",
+            "pass",
+            "password",
+            "chiave d'accesso"
+        ],
+        "score": "5"
+    },
+    {
+        "key": "conferma password",
+        "tags": [
+            "conferma",
+            "confirm"
+        ],
+        "score": "5"
+    },
+    {
+        "key": "integrazione terze parti",
+        "tags": [
+            "oath"
+        ],
+        "score": "4"
+    },
+    {
+        "key": "metodo di pagamento",
+        "tags": [
+            "payment",
+            "pagamento"
+        ],
+        "score": "5"
+    },
+    {
+        "key": "indirizzo",
+        "tags": [
+            "address",
+            "via",
+            "residenza"
+        ],
+        "score": "2"
+    },
+    {
+        "key": "citta",
+        "tags": [
+            "city",
+            "città"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "cap",
+        "tags": [
+            "cap",
+            "codice postale"
+        ],
+        "score": ""
+    },
+    {
+        "key": "motivo segnalazione (body)",
+        "tags": [
+            "motivo segnalazione"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "codice traking",
+        "tags": [
+            "tracking code",
+            "tracking number",
+            "codice di tracciamento"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "codice ordine",
+        "tags": [
+            "codice ordine"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "codice titolare",
+        "tags": [
+            "codice titolare"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "pin",
+        "tags": [
+            "pin"
+        ],
+        "score": "3"
+    },
+    {
+        "key": "okey",
+        "tags": [
+            "ok",
+            "okey"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "nazione",
+        "tags": [
+            "paese",
+            "nazione"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "data valuta",
+        "tags": [
+            "data valuta"
+        ],
+        "score": "2"
+    },
+    {
+        "key": "valuta",
+        "tags": [
+            "valuta"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "partita iva",
+        "tags": [
+            "partita iva"
+        ],
+        "score": "2"
+    },
+    {
+        "key": "codice fiscale",
+        "tags": [
+            "codice fiscale"
+        ],
+        "score": "2"
+    },
+    {
+        "key": "pop up cookie (ok)",
+        "tags": [
+            "pop up cookie"
+        ],
+        "score": "2"
+    },
+    {
+        "key": "carica una immagine",
+        "tags": [
+            "carica immagine",
+            "carica foto"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "scrivi un post",
+        "tags": [
+            "scrivi un post",
+            "write a post"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "carica un video",
+        "tags": [
+            "carica video",
+            "load video"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "a cosa stai pensando",
+        "tags": [
+            "a cosa stai pensando"
+        ],
+        "score": "1"
+    },
+    {
+        "key": "questionario si/no",
+        "tags": [
+            "questionario"
+        ],
+        "score": "1"
+    }
+]

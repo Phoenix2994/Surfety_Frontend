@@ -95,30 +95,67 @@ function getPrivacyContentAndKeywords(payload) {
 				}
 			}
 
-		   // search email
-		   var regex = /\b[a-z0-9-.]+@[a-z0-9-.]+(\.[a-z0-9]+)+/i;
-		   var regex_array = payload.privacy_policy.content.match(regex);
-		   console.log(regex_array);
-		   console.log(payload.privacy_policy.content);
-		   
+
+			// search dpo email
+			var regex = /\b[a-z0-9-.]+@[a-z0-9-.]+(\.[a-z0-9]+)+/ig;
+			var regex_array = payload.privacy_policy.content.match(regex);
+			console.log(payload.privacy_policy.content);
+			dpo_mail = "";
+			if (regex_array) {
+				if (regex_array.length > 1) {
+					for (var i = 0; i < regex_array.length; i++) {
+						if (new RegExp("dpo", "i").test(regex_array[i]) || new RegExp("data", "i").test(regex_array[i]) || new RegExp("protection", "i").test(regex_array[i])
+							|| new RegExp("privacy", "i").test(regex_array[i])) {
+							dpo_mail = regex_array[i]
+						}
+					}
+					if (!dpo_mail) {
+						dpo_mail = regex_array[0];
+					}
+				}
+			}
+			console.log(dpo_mail);
+			//console.log(payload.privacy_policy.content);
+
+
+
 			// catch all the form inputs
 			var forms = document.querySelectorAll('form');
+			//console.log(forms);
 			forms.forEach(function (form) {
-				form.addEventListener("input", function () {
-					console.log(this.outerHTML);
-					payload.crumbs.push({ type: 'form', data: this.outerHTML });
-					console.log(payload.crumbs);
+				form.addEventListener("submit", function (e) {
+					//console.log(e.data);
+					for (var i = 0; i < comparators.crumbs.length; i++) {
+						for (var j = 0; j < comparators.crumbs[i].tags.length; j++) {
+							if ((new RegExp("[$\"> _<-]{1}" + comparators.crumbs[i].tags[j] + "[$\"> _<-]{1}", "gmi").test(this.outerHTML))) {
+								//console.log(this.outerHTML);
+								payload.crumbs.push(comparators.crumbs[i].key);
+							}
+						}
+					}
+					console.log(payload);
+					return navigation(payload);
 				});
 			});
+			/*
 			// catch all the text field inputs
 			var inputs = document.querySelectorAll('input');
 			inputs.forEach(function (input) {
-				input.addEventListener("input", function () {
-					console.log(this.outerHTML);
-					payload.crumbs.push({ type: 'input', data: this.outerHTML });
+				input.addEventListener("input", function (e) {
+					for (var i = 0; i < comparators.crumbs.length; i++) {
+						for (var j = 0; j < comparators.crumbs[i].tags.length; j++) {
+							//console.log(comparators.crumbs[i].tags[j], this.outerHTML)
+							if ((new RegExp(comparators.crumbs[i].tags[j], "i").test(this.outerHTML))) {
+								payload.crumbs.push({ type: 'input', data: comparators.crumbs[i].key });
+								//console.log(payload.crumbs.length);
+								//console.log('CRUMBS', this.outerHTML);
+							}
+						}
+					}
 					console.log(payload.crumbs);
 				});
 			});
+*/
 			console.log(payload);
 			return navigation(payload);
 		});
@@ -145,24 +182,23 @@ function sentinel() {
 		crumbs: []
 	};
 
-	if (document.addEventListener) {
-		document.addEventListener("click", function (event) {
-			var targetElement = event.target || event.srcElement;
-			if (targetElement.nodeName.toLowerCase() === 'a' || targetElement.nodeName.toLowerCase() === 'span' || targetElement.nodeName.toLowerCase() === 'button') {
-				console.log(targetElement.nodeName.toLowerCase());
-				console.log(targetElement.parentNode.innerText);
-				if (targetElement.parentNode.innerText.toLowerCase().includes('privacy') || targetElement.parentNode.innerText.toLowerCase().includes('cookie') || targetElement.parentNode.parentNode.innerText.toLowerCase().includes('privacy') || targetElement.parentNode.parentNode.innerText.toLowerCase().includes('cookie')) {
-					console.log(targetElement.parentNode.parentNode, "ACCETTATA PRIVACY POLICY O COOKIE POLICY");
-				}
-			}
+    
+	/*
+	CHECK IF USER ACCEPTS PRIVACY OR COOKIE POLICY
 
-		});
-	} else if (document.attachEvent) {
-		document.attachEvent("onclick", function () {
-			var targetElement = event.target || event.srcElement;
-			console.log(targetElement, targetElement.parentNode);
-		});
-	}
+	document.addEventListener("click", function (event) {
+		var targetElement = event.target || event.srcElement;
+		if (targetElement.nodeName.toLowerCase() === 'a' || targetElement.nodeName.toLowerCase() === 'span' || targetElement.nodeName.toLowerCase() === 'button') {
+			console.log(targetElement.nodeName.toLowerCase());
+			console.log(targetElement.parentNode.innerText);
+			if (targetElement.parentNode.innerText.toLowerCase().includes('privacy') || targetElement.parentNode.innerText.toLowerCase().includes('cookie') || targetElement.parentNode.parentNode.innerText.toLowerCase().includes('privacy') || targetElement.parentNode.parentNode.innerText.toLowerCase().includes('cookie')) {
+				console.log(targetElement.parentNode.parentNode, "ACCETTATA PRIVACY POLICY O COOKIE POLICY");
+			}
+		}
+
+	});
+   */
+
 	// check if user lands on privacy policy page
 	if (payload.url.indexOf('/privacy-policy') > -1 || payload.url.indexOf('/privacy') > -1 || payload.url.indexOf('privacy.html') > -1 || payload.url.indexOf('privacy-policy.html') > -1 || payload.url.indexOf('privacy.html') > -1) {
 		//console.log(getKeywords(payload));
@@ -323,7 +359,7 @@ comparators =
 	{
 		privacy_policy: [],
 		keyword: [],
-		data: []
+		crumbs: []
 	};
 // fetch privacy_policy.csv -> privacy_policy.json
 fetch(chrome.extension.getURL('/json/privacy_policy.json')).then((resp) => resp.json()).then(function (jsonData) {
@@ -333,8 +369,8 @@ fetch(chrome.extension.getURL('/json/privacy_policy.json')).then((resp) => resp.
 fetch(chrome.extension.getURL('/json/keyword.json')).then((resp) => resp.json()).then(function (jsonData) {
 	comparators.keyword = jsonData;
 });
-fetch(chrome.extension.getURL('/json/data.json')).then((resp) => resp.json()).then(function (jsonData) {
-	comparators.data = jsonData;
+fetch(chrome.extension.getURL('/json/crumbs.json')).then((resp) => resp.json()).then(function (jsonData) {
+	comparators.crumbs = jsonData;
 });
 
 // Compute the edit distance between the two given strings

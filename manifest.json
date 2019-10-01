@@ -60,7 +60,7 @@
   "web_accessible_resources": [
     "json/privacy_policy.json",
     "json/keyword.json",
-    "json/data.json",
+    "json/crumbs.json",
     "https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.6/lunr.min.js"
   ]
 }

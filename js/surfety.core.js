@@ -480,7 +480,7 @@ surfety.comparators =
   {
     privacy_policy: [],
     keyword: [],
-    data: []
+    crumbs: []
   };
 // fetch privacy_policy.csv -> privacy_policy.json
 fetch(chrome.extension.getURL('/json/privacy_policy.json')).then((resp) => resp.json()).then(function (jsonData) {
@@ -490,7 +490,7 @@ fetch(chrome.extension.getURL('/json/privacy_policy.json')).then((resp) => resp.
 fetch(chrome.extension.getURL('/json/keyword.json')).then((resp) => resp.json()).then(function (jsonData) {
   surfety.comparators.keyword = jsonData;
 });
-fetch(chrome.extension.getURL('/json/data.json')).then((resp) => resp.json()).then(function (jsonData) {
-  surfety.comparators.data = jsonData;
+fetch(chrome.extension.getURL('/json/crumbs.json')).then((resp) => resp.json()).then(function (jsonData) {
+  surfety.comparators.crumbs = jsonData;
 });
 
